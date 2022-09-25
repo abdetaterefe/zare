@@ -33,11 +33,12 @@
     geezNumber = ConvertToEthiopic(number);
   }
   let showModal = false;
+  let showGtoEModal = false;
   const handleEtoGToggleModal = () => {
     showModal = !showModal;
   };
   const handleGtoEToggleModal = () => {
-    showModal = !showModal;
+    showGtoEModal = !showGtoEModal;
   };
 </script>
 
@@ -101,7 +102,7 @@
   </div>
   <ConverterModal open={showModal} on:close={() => handleEtoGToggleModal()} />
   <GtoEConverterModal
-    open={showModal}
+    open={showGtoEModal}
     on:close={() => handleGtoEToggleModal()}
   />
 </main>
