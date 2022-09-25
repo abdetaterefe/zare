@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { EtDatetime, ETC, BahireHasab, ConvertToEthiopic } from "abushakir";
+  import { EtDatetime, ETC, ConvertToEthiopic } from "abushakir";
   import DayCard from "./lib/DayCard.svelte";
   import Progress from "./lib/Progress.svelte";
   import ConverterModal from "./lib/ConverterModal.svelte";
@@ -35,7 +35,6 @@
   const handleToggleModal = () => {
     showModal = !showModal;
   };
-  const gregorian: number = Date.now();
 </script>
 
 <main>
@@ -68,7 +67,7 @@
       <input
         bind:value={number}
         type="number"
-        min=1
+        min="1"
         step="1"
         class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
       />
@@ -96,5 +95,4 @@
     >
   </div>
   <ConverterModal open={showModal} on:close={() => handleToggleModal()} />
-  <p>{new Date(gregorian).toDateString()}</p>
 </main>

@@ -1,7 +1,25 @@
-<script lang="ts">
+<script async script lang="ts">
+  import { EtDatetime } from "abushakir";
   import { createEventDispatcher } from "svelte";
   export let open = false;
   const dispatch = createEventDispatcher();
+  const now: EtDatetime = new EtDatetime();
+
+  let day: number = now.date.day;
+  let month: number = now.date.month;
+  let year: number = now.date.year;
+
+  let outPutDay = 0;
+  let outPutMonth = 0;
+  let outPutYear = 0;
+
+  async function convert() {
+    const recieved: EtDatetime = new EtDatetime(year, month, day, 0, 0, 0, 0);
+    const gregorian: Date = new Date(recieved.moment);
+    outPutDay = gregorian.getDate();
+    outPutMonth = gregorian.getMonth() + 1;
+    outPutYear = gregorian.getFullYear();
+  }
 </script>
 
 {#if open}
@@ -33,53 +51,69 @@
         </button>
       </div>
       <div class="content p-8">
-        <form>
-          <div class="grid grid-cols-3 gap-3 mb-3">
-            <div>
-              <p for="">date</p>
-              <input
-                required
-                type="number"
-                value=""
-                min="1"
-                minlength="1"
-                max="30"
-                maxlength="2"
-                class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
-              />
-            </div>
-            <div>
-              <p for="">month</p>
-              <input
-                required
-                type="number"
-                value=""
-                min="1"
-                minlength="1"
-                max="13"
-                maxlength="2"
-                class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
-              />
-            </div>
-            <div>
-              <p for="">year</p>
-              <input
-                required
-                type=number
-                value=""
-                min=1
-                minlength=1
-                max=9999
-                maxlength=4
-                class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
-              />
-            </div>
+        <div class="grid grid-cols-3 gap-3 mb-3">
+          <div>
+            <p for="">date</p>
+            <input
+              required
+              type="number"
+              bind:value={day}
+              min="1"
+              minlength="1"
+              max="30"
+              maxlength="2"
+              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+            />
           </div>
-          <button
-            class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
-            >Convert</button
-          >
-        </form>
+          <div>
+            <p for="">month</p>
+            <input
+              required
+              type="number"
+              bind:value={month}
+              min="1"
+              minlength="1"
+              max="13"
+              maxlength="2"
+              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+            />
+          </div>
+          <div>
+            <p for="">year</p>
+            <input
+              required
+              type="number"
+              bind:value={year}
+              min="1"
+              minlength="1"
+              max="9999"
+              maxlength="4"
+              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+            />
+          </div>
+        </div>
+        <button
+          on:click={() => convert()}
+          class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
+          >Ethiopian to Gregorian</button
+        >
+        <div class="grid grid-cols-3 gap-3 mt-3">
+          <div>
+            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+              {outPutDay}
+            </p>
+          </div>
+          <div>
+            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+              {outPutMonth}
+            </p>
+          </div>
+          <div>
+            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+              {outPutYear}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
