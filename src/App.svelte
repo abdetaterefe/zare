@@ -3,6 +3,7 @@
   import DayCard from "./lib/DayCard.svelte";
   import Progress from "./lib/Progress.svelte";
   import ConverterModal from "./lib/ConverterModal.svelte";
+  import GtoEConverterModal from "./lib/GtoEConverterModal.svelte";
 
   const now: EtDatetime = new EtDatetime();
 
@@ -32,7 +33,10 @@
     geezNumber = ConvertToEthiopic(number);
   }
   let showModal = false;
-  const handleToggleModal = () => {
+  const handleEtoGToggleModal = () => {
+    showModal = !showModal;
+  };
+  const handleGtoEToggleModal = () => {
     showModal = !showModal;
   };
 </script>
@@ -85,14 +89,19 @@
   <p class="mt-72 md:text-8xl text-5xl">Converter</p>
   <div class="mb-36 grid md:grid-cols-2 grid-cols-1 gap-3">
     <button
-      on:click={() => handleToggleModal()}
+      on:click={() => handleEtoGToggleModal()}
       class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
       >Ethiopian to Gregorian</button
     >
     <button
+      on:click={() => handleGtoEToggleModal()}
       class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
       >Gregorian to Ethiopian</button
     >
   </div>
-  <ConverterModal open={showModal} on:close={() => handleToggleModal()} />
+  <ConverterModal open={showModal} on:close={() => handleEtoGToggleModal()} />
+  <GtoEConverterModal
+    open={showModal}
+    on:close={() => handleGtoEToggleModal()}
+  />
 </main>
