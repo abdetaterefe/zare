@@ -4,6 +4,7 @@
   import Progress from "./lib/Progress.svelte";
   import ConverterModal from "./lib/ConverterModal.svelte";
   import GtoEConverterModal from "./lib/GtoEConverterModal.svelte";
+  import CButton from "./lib/CButton.svelte";
 
   const now: EtDatetime = new EtDatetime();
 
@@ -43,66 +44,69 @@
 </script>
 
 <main>
-  <p class="md:mt-72 md:text-8xl text-6xl">ዛሬ ቀን</p>
-  <!-- Day Card -->
-  <DayCard
-    {monthName}
-    {currentDay}
-    {currentYear}
-    {currentDayInGEEZ}
-    {currentYearInGEEZ}
-  />
-  <!-- Month Progress -->
-  <Progress
-    currentProgress={monthName}
-    progressPercentInGEEZ={monthProgressInGEEZ}
-    progressPercent={monthProgress}
-  />
-  <!-- Year Progress -->
-  <Progress
-    currentProgress={currentYear}
-    progressPercentInGEEZ={yearProgressInGEEZ}
-    progressPercent={yearProgress}
-  />
-
-  <p class="mt-72 md:text-8xl text-6xl">GE'EZ numbers</p>
-  <p class="md:text-2xl">Realtime Arabic Number to Geez Number translator</p>
-  <div class="mt-5">
-    <div class="grid grid-cols-2 md:text-5xl text-3xl">
-      <input
-        bind:value={number}
-        type="number"
-        min="1"
-        step="1"
-        class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <p class="md:mt-36 md:text-8xl text-6xl">ዛሬ ቀን</p>
+    <!-- Day Card -->
+    <DayCard
+      {monthName}
+      {currentDay}
+      {currentYear}
+      {currentDayInGEEZ}
+      {currentYearInGEEZ}
+    />
+    <!-- Month Progress -->
+    <Progress
+      currentProgress={monthName}
+      progressPercentInGEEZ={monthProgressInGEEZ}
+      progressPercent={monthProgress}
+    />
+    <!-- Year Progress -->
+    <Progress
+      currentProgress={currentYear}
+      progressPercentInGEEZ={yearProgressInGEEZ}
+      progressPercent={yearProgress}
+    />
+  </div>
+  <p class="text-6xl">⇓</p>
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <p class="mt-36 md:text-8xl text-6xl">GE'EZ numbers</p>
+    <p class="md:text-2xl">Realtime Arabic Number to Geez Number translator</p>
+    <div class="mt-5">
+      <div class="grid grid-cols-2 md:text-5xl text-3xl">
+        <input
+          bind:value={number}
+          type="number"
+          min="1"
+          step="1"
+          class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+        />
+        <span class="p-3">{geezNumber}</span>
+      </div>
+      <div class="mt-36 grid md:grid-cols-10 grid-cols-5 md:text-5xl text-3xl ">
+        {#each numbers as num}
+          <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+            {num} <br />{ConvertToEthiopic(num)}
+          </p>
+        {/each}
+      </div>
+    </div>
+  </div>
+  <p class="text-6xl">⇓</p>
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <p class="mt-72 md:text-8xl text-5xl">Converter</p>
+    <div class="mb-36 grid md:grid-cols-2 grid-cols-1 gap-3">
+      <!-- EtoG -->
+      <ConverterModal
+        open={showModal}
+        on:close={() => handleEtoGToggleModal()}
       />
-      <span class="p-3">{geezNumber}</span>
-    </div>
-    <div class="mt-36 grid md:grid-cols-10 grid-cols-5 md:text-5xl text-3xl ">
-      {#each numbers as num}
-        <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
-          {num} <br />{ConvertToEthiopic(num)}
-        </p>
-      {/each}
+      <CButton onClick={handleEtoGToggleModal} text="Ethiopian to Gregorian" />
+      <!-- GtoE -->
+      <GtoEConverterModal
+        open={showGtoEModal}
+        on:close={() => handleGtoEToggleModal()}
+      />
+      <CButton onClick={handleGtoEToggleModal} text="Gregorian to Ethiopian" />
     </div>
   </div>
-
-  <p class="mt-72 md:text-8xl text-5xl">Converter</p>
-  <div class="mb-36 grid md:grid-cols-2 grid-cols-1 gap-3">
-    <button
-      on:click={() => handleEtoGToggleModal()}
-      class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
-      >Ethiopian to Gregorian</button
-    >
-    <button
-      on:click={() => handleGtoEToggleModal()}
-      class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
-      >Gregorian to Ethiopian</button
-    >
-  </div>
-  <ConverterModal open={showModal} on:close={() => handleEtoGToggleModal()} />
-  <GtoEConverterModal
-    open={showGtoEModal}
-    on:close={() => handleGtoEToggleModal()}
-  />
 </main>
