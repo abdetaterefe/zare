@@ -2,9 +2,9 @@
   import { EtDatetime, ETC, ConvertToEthiopic } from "abushakir";
   import DayCard from "./lib/DayCard.svelte";
   import Progress from "./lib/Progress.svelte";
-  import ConverterModal from "./lib/ConverterModal.svelte";
+  import EtoGConverterModal from "./lib/EtoGConverterModal.svelte";
   import GtoEConverterModal from "./lib/GtoEConverterModal.svelte";
-  import CButton from "./lib/CButton.svelte";
+  import ConvertButton from "./lib/ConvertButton.svelte";
 
   const now: EtDatetime = new EtDatetime();
 
@@ -44,8 +44,12 @@
 </script>
 
 <main>
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-    <p class="md:mt-36 md:text-8xl text-6xl">ዛሬ ቀን</p>
+  <div class="py-6 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-6">
+    <p
+      class="md:mt-32 md:text-8xl text-6xl shadow-ob p-2 border-4 border-black bg-blue-500"
+    >
+      ዛሬ ቀን
+    </p>
     <!-- Day Card -->
     <DayCard
       {monthName}
@@ -68,23 +72,31 @@
     />
   </div>
   <p class="text-6xl">⇓</p>
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-    <p class="mt-36 md:text-8xl text-6xl">GE'EZ numbers</p>
-    <p class="md:text-2xl">Realtime Arabic Number to Geez Number translator</p>
+  <!-- GEEZ NUMBER CONVERTER -->
+  <div class="py-6 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-6">
+    <div class="shadow-ob p-2 border-4 border-black bg-blue-500">
+      <p class="md:text-8xl text-6xl">GE'EZ numbers</p>
+      <p class="md:text-2xl">
+        Realtime Arabic Number to Geez Number translator
+      </p>
+    </div>
     <div class="mt-5">
+      <p class="text-left md:text-2xl">Enter number here</p>
       <div class="grid grid-cols-2 md:text-5xl text-3xl">
         <input
           bind:value={number}
           type="number"
           min="1"
           step="1"
-          class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+          class="appearance-none block leading-tight shadow-ob p-2 border-4 border-black bg-orange-500 mr-6"
         />
-        <span class="p-3">{geezNumber}</span>
+        <span class="shadow-ob p-2 border-4 border-black bg-blue-500"
+          >{geezNumber}</span
+        >
       </div>
       <div class="mt-36 grid md:grid-cols-10 grid-cols-5 md:text-5xl text-3xl ">
         {#each numbers as num}
-          <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+          <p class="m-2 shadow-ob p-2 border-2 border-black bg-blue-500">
             {num} <br />{ConvertToEthiopic(num)}
           </p>
         {/each}
@@ -92,21 +104,28 @@
     </div>
   </div>
   <p class="text-6xl">⇓</p>
+  <!-- DATE CONVERTER -->
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-    <p class="mt-72 md:text-8xl text-5xl">Converter</p>
+    <p class="mt-36 mb-8 md:text-8xl text-5xl shadow-ob p-2 border-4 border-black bg-blue-500">Converter</p>
     <div class="mb-36 grid md:grid-cols-2 grid-cols-1 gap-3">
       <!-- EtoG -->
-      <ConverterModal
+      <EtoGConverterModal
         open={showModal}
         on:close={() => handleEtoGToggleModal()}
       />
-      <CButton onClick={handleEtoGToggleModal} text="Ethiopian to Gregorian" />
+      <ConvertButton
+        onClick={handleEtoGToggleModal}
+        text="Ethiopian to Gregorian"
+      />
       <!-- GtoE -->
       <GtoEConverterModal
         open={showGtoEModal}
         on:close={() => handleGtoEToggleModal()}
       />
-      <CButton onClick={handleGtoEToggleModal} text="Gregorian to Ethiopian" />
+      <ConvertButton
+        onClick={handleGtoEToggleModal}
+        text="Gregorian to Ethiopian"
+      />
     </div>
   </div>
 </main>

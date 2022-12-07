@@ -28,14 +28,14 @@
   >
     <div class="modal-overlay fixed w-full h-full bg-gray-900 opacity-50" />
     <div
-      class="bg-white dark:bg-black w-full lg:h-max lg:w-1/2  mx-auto rounded-lg shadow-xl z-50 overflow-y-auto"
+      class="shadow-ob p-2 border-4 border-black bg-blue-500 w-full lg:h-max lg:w-1/2  mx-auto z-50 overflow-y-auto"
     >
       <div
-        class="flex justify-between items-center head bg-gray-100 dark:bg-gray-900 py-5 px-8 text-2xl font-extrabold"
+        class="flex justify-between items-center head bg-blue-600 py-5 px-8 text-2xl font-extrabold"
       >
         Pick a date
         <button
-          class="p-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 hover:dark:bg-gray-700 rounded-full ml-4"
+          class="hover:bg-orange-600 ml-4 shadow-ob p-2 border-4 border-black bg-orange-500"
           on:click={() => dispatch("close")}
         >
           <svg
@@ -62,7 +62,7 @@
               minlength="1"
               max="30"
               maxlength="2"
-              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+              class="appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-orange-500"
             />
           </div>
           <div>
@@ -75,7 +75,7 @@
               minlength="1"
               max="13"
               maxlength="2"
-              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+              class="appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-orange-500"
             />
           </div>
           <div>
@@ -88,28 +88,28 @@
               minlength="1"
               max="9999"
               maxlength="4"
-              class="appearance-none block w-full bg-gray-200 border border-gray-200 dark:bg-gray-800 dark:border-gray-800 rounded p-3 leading-tight"
+              class="appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-orange-500"
             />
           </div>
         </div>
         <button
           on:click={() => convert()}
-          class="md:text-2xl rounded px-4 py-2 font-bold bg-orange-500 hover:bg-orange-600"
+          class="md:text-2xl px-4 py-2 font-bold ml-4 shadow-ob p-2 border-4 border-black bg-orange-500 hover:bg-orange-600"
           >Ethiopian to Gregorian</button
         >
         <div class="grid grid-cols-3 gap-3 mt-3">
           <div>
-            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+            <p class="m-1 appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-blue-600">
               {outPutDay}
             </p>
           </div>
           <div>
-            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+            <p class="m-1 appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-blue-600">
               {outPutMonth}
             </p>
           </div>
           <div>
-            <p class="rounded-lg border border-gray-500 shadow-md p-1 m-1">
+            <p class="m-1 appearance-none block w-full leading-tight shadow-ol p-2 border-2 border-black bg-blue-600">
               {outPutYear}
             </p>
           </div>

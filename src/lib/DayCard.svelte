@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="grid md:grid-cols-3 p-5 gap-5 rounded-lg border border-gray-500 shadow-md"
+  class="grid mt-10 shadow-ob md:grid-cols-3 p-5 gap-5 border-4 border-black bg-blue-500"
 >
   <div class="flex justify-center items-center">
     <p class="md:text-5xl text-3xl">{monthName}</p>

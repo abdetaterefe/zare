@@ -9,9 +9,9 @@
     <span>{currentProgress} progress is </span>
     <span>{progressPercentInGEEZ} or {progressPercent} %</span>
   </div>
-  <div class="bg-gray-200 dark:bg-gray-800 w-full rounded-full h-6">
+  <div class="bg-blue-500 w-full shadow-ob border-2 border-black">
     <div
-      class="bg-orange-600 h-6 rounded-full"
+      class="bg-orange-500 h-6"
       style="width: {progressPercent}%;"
     />
   </div>
